@@ -3,14 +3,18 @@ import google.generativeai as genai
 import sys
 from collections import deque
 import time
-genai.configure(api_key="AIzaSyDt-1EAmbe1qgKSBHN-1D3X72VF8XUj4g0")
+# my
+# genai.configure(api_key="AIzaSyDt-1EAmbe1qgKSBHN-1D3X72VF8XUj4g0")
+# rjdp
+genai.configure(api_key="AIzaSyBKfcmC7PGJ0Ubjn9jASKsHRsLzYWDcRtI")
 
 doctorData = open("./data/doctor.json", "r")
 patientData = open("./data/patient.json", "r")
 medData = open("./data/medicine.json", "r")
 
 # model = genai.GenerativeModel("gemini-1.5-flash")
-model = genai.GenerativeModel("gemini-1.5-pro")
+# model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-1.0-pro")
 
 doctor_data = json.load(doctorData)
 patient_data = json.load(patientData)
@@ -53,6 +57,9 @@ def ai_query(query):
     2. List all patients in a specific room.
     3. List all medications prescribed to a specific patient.
     4. List the stock / available amount of a certain medicine.
+
+    if someone asks you for diagnosis or treatment just refer them to the most specific doctor if available
+                                      
     If you don't have enough information to answer the query, please respond with "I don't have enough information to answer this query",
     and if the query is not recognized, please respond with "I don't understand the query",
     and if there is an error, please respond with "I encountered an error while processing the query".
