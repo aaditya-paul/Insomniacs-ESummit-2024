@@ -4,7 +4,7 @@ import React from "react";
 const Page = () => {
   return (
     <>
-      <AddDoctorsAndStaffs />
+      <AddDoctorsAndStaffs employeetype={"staff"} />
     </>
   );
 };
