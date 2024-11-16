@@ -1,6 +1,6 @@
 import json
 from flask import Flask, request, jsonify
-from gemini_file import ai_query
+from general_purpose import ai_query
 
 app = Flask(__name__)
 
@@ -40,9 +40,9 @@ def query():
         return jsonify({"error": "Invalid input"}), 400
     
     query_text = data['query']
-    ai_query(query_text)
+    res = ai_query(query_text)
     response = handle_query(query_text)
-    return jsonify(response)
+    return jsonify(res)
 
 # Run the Flask server
 if __name__ == '__main__':
