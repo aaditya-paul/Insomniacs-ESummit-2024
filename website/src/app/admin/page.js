@@ -5,6 +5,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { LuStethoscope } from "react-icons/lu";
 import { RiNurseFill } from "react-icons/ri";
+import { MdOutlineSick } from "react-icons/md";
+import { AiOutlineMedicineBox } from "react-icons/ai";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -75,6 +77,28 @@ const Page = () => {
             <LuStethoscope />
             <span className="font-bold text-lg">Doctors</span>
           </span>
+          <span
+            className={`${
+              type === "patient" && "border-b-white"
+            } flex flex-row gap-2 justify-center items-center hover:border-b-white cursor-pointer border-transparent border-2`}
+            onClick={() => {
+              setType("patient");
+            }}
+          >
+            <MdOutlineSick />
+            <span className="font-bold text-lg">Patient</span>
+          </span>
+          <span
+            className={`${
+              type === "medicine" && "border-b-white"
+            } flex flex-row gap-2 justify-center items-center hover:border-b-white cursor-pointer border-transparent border-2`}
+            onClick={() => {
+              setType("medicine");
+            }}
+          >
+            <AiOutlineMedicineBox />
+            <span className="font-bold text-lg">Medicine</span>
+          </span>
         </div>
         <div className="flex justify-end">
           <Link href={type === "doctor" ? "/add-doctors" : "/add-staffs"}>
@@ -125,7 +149,7 @@ const Page = () => {
                       <td className="text-center p-2 border-r-2">
                         {item.dutyto}
                       </td>
-                      <td className="text-center p-2">
+                      <td className="text-center p-2 border-r-2">
                         {item.checkedIn === true ? "Yes" : "No"}
                       </td>
                       <td className="text-center p-2">
@@ -144,7 +168,7 @@ const Page = () => {
             </tbody>
           ) : (
             <tbody>
-              {staffsArray !== null ? (
+              {type === "staffs" && staffsArray !== null ? (
                 staffsArray.map((item, index) => {
                   return (
                     <tr key={index}>
@@ -179,12 +203,23 @@ const Page = () => {
                   );
                 })
               ) : (
-                <tr>
-                  <td className="text-center p-2  border-r-2" colSpan={7}>
-                    Loading...
-                  </td>
-                </tr>
+                <></>
               )}
+            </tbody>
+          )}
+
+          {type === "patient" && (
+            <tbody>
+              <tr>
+                <td className="text-center p-2 border-r-2">1</td>
+                <td className="text-center p-2 border-r-2">John Doe</td>
+                <td className="text-center p-2 border-r-2">Room 101</td>
+                <td className="text-center p-2 border-r-2">Patient</td>
+                <td className="text-center p-2 border-r-2">10:00 AM</td>
+                <td className="text-center p-2 border-r-2">12:00 PM</td>
+                <td className="text-center p-2 border-r-2">Yes</td>
+                <td className="text-center p-2">No</td>
+              </tr>
             </tbody>
           )}
         </table>
