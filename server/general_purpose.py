@@ -37,7 +37,7 @@ class Memory:
     def cleanup(self):
         current_time = time.time()
         while self.memory and (current_time - self.memory[0][0] > self.retention_period):
-            self.memory.popleft()
+            self.memory.popleft(    )
 
 memory = Memory()
 
