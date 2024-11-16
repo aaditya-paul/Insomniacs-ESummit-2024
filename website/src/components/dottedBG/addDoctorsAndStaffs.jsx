@@ -1,10 +1,10 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import { addDoc, collection, doc, getDoc, setDoc } from "@firebase/firestore";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import {db} from "@/lib/firebaseConfig";
+import {addDoc, collection, doc, getDoc, setDoc} from "@firebase/firestore";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
+import React, {useEffect, useState} from "react";
 
-const AddDoctorsAndStaffs = ({ employeetype }) => {
+const AddDoctorsAndStaffs = ({employeetype}) => {
   const params = useParams();
 
   const [name, setName] = useState("");
@@ -29,13 +29,39 @@ const AddDoctorsAndStaffs = ({ employeetype }) => {
       return;
     }
 
-    let collection = "doctors";
+    let collection_ref = "doctors";
 
     if (employeetype == "staff") {
       collection = "staffs";
     }
 
-    await addDoc(collection(db, collection), {
+    await fetch("http://192.168.9.96:5000/add/doctor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        room: room,
+        duty: {
+          start: dutyfrom,
+          end: dutyto,
+        },
+        speciality: type,
+        checkedIn: checkedIn,
+        // TODO: Add free:true
+        // free:true
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+
+    await addDoc(collection(db, collection_ref), {
       name: name,
       room: room,
       dutyfrom: dutyfrom,
