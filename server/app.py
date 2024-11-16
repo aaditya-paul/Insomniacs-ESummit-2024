@@ -44,6 +44,6 @@ def query():
     response = handle_query(query_text)
     return jsonify(res)
 
-# Run the Flask server
+# Run the server
 if __name__ == '__main__':
     app.run(debug=True)
