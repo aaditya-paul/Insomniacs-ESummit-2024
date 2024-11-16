@@ -1,8 +1,8 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import { addDoc, collection, doc, getDoc, setDoc } from "@firebase/firestore";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import {db} from "@/lib/firebaseConfig";
+import {addDoc, collection, doc, getDoc, setDoc} from "@firebase/firestore";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
+import React, {useEffect, useState} from "react";
 
 const Page = () => {
   const router = useRouter();
@@ -29,6 +29,22 @@ const Page = () => {
       return;
     }
 
+    await fetch("http://192.168.9.96:5000/add/doctor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        room: room,
+        dutyfrom: dutyfrom,
+        dutyto: dutyto,
+        type: type,
+        checkedIn: checkedIn,
+      }),
+    });
+
+    // add or update doctor
     await addDoc(collection(db, "doctors"), {
       name: name,
       room: room,

@@ -1,10 +1,10 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import { collection, getDoc, getDocs } from "@firebase/firestore";
+import {db} from "@/lib/firebaseConfig";
+import {collection, getDoc, getDocs} from "@firebase/firestore";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { LuStethoscope } from "react-icons/lu";
-import { RiNurseFill } from "react-icons/ri";
+import React, {useEffect, useState} from "react";
+import {LuStethoscope} from "react-icons/lu";
+import {RiNurseFill} from "react-icons/ri";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -32,7 +32,9 @@ const Page = () => {
   return (
     <>
       <div className="px-24 py-10 flex flex-col gap-7 min-h-screen bg-blue-600">
-        <h1 className="font-bold text-4xl text-yellow-400">Insomniacs Hospital</h1>
+        <h1 className="font-bold text-4xl text-yellow-400">
+          Insomniacs Hospital
+        </h1>
         <div className="flex gap-5 text-white">
           <span
             className={`${
@@ -67,12 +69,13 @@ const Page = () => {
         <table className="rounded-lg border-2 text-white">
           <thead>
             <tr className="border-b-2">
-              <th className="border-r-2 text-lg text-yellow-400">sr</th>
+              <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
               <th className="border-r-2 text-lg text-yellow-400">Name</th>
-              <th className="border-r-2 text-lg text-yellow-400">uid</th>
+              {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
               <th className="border-r-2 text-lg text-yellow-400">Room</th>
               <th className="border-r-2 text-lg text-yellow-400">Type</th>
-              <th className="border-r-2 text-lg text-yellow-400">Duty</th>
+              <th className="border-r-2 text-lg text-yellow-400">Duty from</th>
+              <th className="border-r-2 text-lg text-yellow-400">Duty to</th>
               <th className="text-lg text-yellow-400">Checked in / Arrived</th>
             </tr>
           </thead>
@@ -87,17 +90,20 @@ const Page = () => {
                         {index + 1}
                       </td>
                       <td className="text-center p-2 border-r-2">
-                        {item.name}
+                        {item.name?.toUpperCase()}
                       </td>
-                      <td className="text-center p-2 border-r-2">{item.uid}</td>
+                      {/* <td className="text-center p-2 border-r-2">{item.uid}</td> */}
                       <td className="text-center p-2 border-r-2">
-                        {item.room}
-                      </td>
-                      <td className="text-center p-2 border-r-2">
-                        {item.type}
+                        {item.room?.toUpperCase()}
                       </td>
                       <td className="text-center p-2 border-r-2">
-                        {item.dutyfrom} to {item.dutyto}
+                        {item.type?.toUpperCase()}
+                      </td>
+                      <td className="text-center p-2 border-r-2">
+                        {item.dutyfrom}
+                      </td>
+                      <td className="text-center p-2 border-r-2">
+                        {item.dutyto}
                       </td>
                       <td className="text-center p-2">
                         {item.checkedIn === true ? "Yes" : "No"}
