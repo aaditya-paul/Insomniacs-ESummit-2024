@@ -39,7 +39,7 @@ const Page = () => {
     })
       .then(() => {
         alert("Doctor added successfully");
-        router.push("/admin");
+        window.location.href = "/admin";
       })
       .catch((err) => {
         alert("Error adding doctor");
@@ -94,7 +94,7 @@ const Page = () => {
             Enter Room no:
           </label>
           <input
-            type="text"
+            type="number"
             className="outline-none rounded-md  border-b-2 bg-transparent border-white p-4 placeholder:text-white"
             value={room}
             onChange={(e) => {
