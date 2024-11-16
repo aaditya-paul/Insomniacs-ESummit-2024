@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         "ubuntu": "var(--font-ubuntu)",
+        "handwriting": "var(--font-handwriting)",
       },
     },
   },
