@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import DR from "../../public/assests/medical-symbol.png";
 import Image from "next/image";
 import "../styles/client.css"; // Import your CSS file here
@@ -10,6 +10,29 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
   const [messageRecieved, setSetMessageRecieved] = useState(false);
+
+  useEffect(() => {
+    const handleTabClose = async (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      console.log("Tab Closed");
+
+      await fetch("http://192.168.9.96:5000/clear-memory", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({query: "close"}),
+      });
+    };
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
+  }, []);
+
   const handleClick = async () => {
     setLoading(true);
     setSent(true);
@@ -39,7 +62,7 @@ function Page() {
   };
 
   return (
-    <div className="w-full h-screen bg-blue-600 leading-[48px]">
+    <div className="w-full h-screen md:p-0 p-5 bg-blue-600 leading-[48px]">
       <div
         className={` h-full gap-6  flex flex-col justify-center items-center transition-all ease-linear ${
           messageRecieved ? "animate-up" : ""
@@ -55,7 +78,7 @@ function Page() {
           </span>
         </div>
         <div>
-          <div className="min-w-[350px] flex gap-4">
+          <div className="md:min-w-[350px] w-full flex gap-4">
             <input
               onChange={(e) => setMessage(e.target.value)}
               className="bg-transparent w-full p-4 rounded-md text-white placeholder:text-white text-xl border-yellow-400 outline-none border"
@@ -74,11 +97,22 @@ function Page() {
       <div
         className={` ${
           messageRecieved ? "opacity-100" : "opacity-0"
-        } transition-all pointer-events-none ease-linear delay-700 absolute left-1/2 -translate-x-1/2 bottom-5 w-[60vw] shadow-md bg-blue-700/40 backdrop-blur-md rounded-2xl h-[50vh]`}
+        } transition-all pointer-events-none ease-linear delay-700  absolute left-1/2 -translate-x-1/2 bottom-5 w-[90%] md:w-[60vw] shadow-md bg-blue-700/40 md:backdrop-blur-md rounded-2xl h-[50vh]   `}
       >
-        <div className="h-full px-12 py-8 text-white">
-          <div className="text-xl font-handwriting leading-10 text-yellow-300  text-justify">
-            {response}
+        <div className="h-full px-12 py-8 text-white  ">
+          <div className="text-xl font-handwriting leading-10 text-yellow-300    ">
+            <div className=" flex gap-2 items-center ">
+              <div className=" ">
+                <Image
+                  src={DR}
+                  className=" w-10 h-10 object-contain p-1 rounded-full border"
+                  width={12}
+                  height={12}
+                  alt="med"
+                />
+              </div>
+              <span>{response}</span>
+            </div>
           </div>
         </div>
       </div>
