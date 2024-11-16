@@ -1,17 +1,23 @@
-import { initializeApp } from "@firebase/app";
+// Import the functions you need from the SDKs you need
 import { getAuth } from "@firebase/auth";
 import { getFirestore } from "@firebase/firestore";
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB5Y5WTDwGnAPkRVQp4E0AxX5dE0790-Bc",
-  authDomain: "insomniacs-86649.firebaseapp.com",
-  projectId: "insomniacs-86649",
-  storageBucket: "insomniacs-86649.firebasestorage.app",
-  messagingSenderId: "1078521509612",
-  appId: "1:1078521509612:web:85119204d40899edd917c9",
+  apiKey: "AIzaSyBRJU_-XzyDgXH-ZlGVelF02G3QOYNA1zQ",
+  authDomain: "smart-architecture-78637.firebaseapp.com",
+  databaseURL: "https://smart-architecture-78637-default-rtdb.firebaseio.com",
+  projectId: "smart-architecture-78637",
+  storageBucket: "smart-architecture-78637.firebasestorage.app",
+  messagingSenderId: "443024922805",
+  appId: "1:443024922805:web:b5b2d24e6eb307265146fc",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+
