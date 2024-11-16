@@ -1,10 +1,10 @@
 "use client";
-import {db} from "@/lib/firebaseConfig";
-import {collection, getDoc, getDocs} from "@firebase/firestore";
+import { db } from "@/lib/firebaseConfig";
+import { collection, getDoc, getDocs } from "@firebase/firestore";
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
-import {LuStethoscope} from "react-icons/lu";
-import {RiNurseFill} from "react-icons/ri";
+import React, { useEffect, useState } from "react";
+import { LuStethoscope } from "react-icons/lu";
+import { RiNurseFill } from "react-icons/ri";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -28,6 +28,23 @@ const Page = () => {
   useEffect(() => {
     console.log(doctorsArray);
   }, [doctorsArray]);
+
+  useEffect(() => {
+    async function getStaffs() {
+      const querySnapshot = await getDocs(collection(db, "staffs"));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        staffsArray.push(doc.data());
+        docIdArray.push(doc.id);
+      });
+    }
+    getStaffs();
+  }, []);
+
+  useEffect(() => {
+    console.log(staffsArray);
+  }, [staffsArray]);
 
   return (
     <>
@@ -76,7 +93,10 @@ const Page = () => {
               <th className="border-r-2 text-lg text-yellow-400">Type</th>
               <th className="border-r-2 text-lg text-yellow-400">Duty from</th>
               <th className="border-r-2 text-lg text-yellow-400">Duty to</th>
-              <th className="text-lg text-yellow-400">Checked in / Arrived</th>
+              <th className="text-lg border-r-2  text-yellow-400">
+                Checked in / Arrived
+              </th>
+              <th className="text-lg text-yellow-400">Is Doctor free?</th>
             </tr>
           </thead>
 
@@ -108,6 +128,9 @@ const Page = () => {
                       <td className="text-center p-2">
                         {item.checkedIn === true ? "Yes" : "No"}
                       </td>
+                      <td className="text-center p-2">
+                        {item.isFree === true ? "Yes" : "No"}
+                      </td>
                     </tr>
                   );
                 })
@@ -121,25 +144,43 @@ const Page = () => {
             </tbody>
           ) : (
             <tbody>
-              {doctorsArray !== null ? (
+              {staffsArray !== null ? (
                 staffsArray.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="text-center p-5">{index + 1}</td>
-                      <td className="text-center p-5">{item.name}</td>
-                      <td className="text-center p-5">{docIdArray[index]}</td>
-                      <td className="text-center p-5">{item.room}</td>
-                      <td className="text-center p-5">{item.type}</td>
-                      <td className="text-center p-5">
-                        {item.dutyfrom} to {item.dutyto}
+                      <td className="text-center p-2  border-r-2">
+                        {index + 1}
                       </td>
-                      <td className="text-center p-5">{item.checkIn}</td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.name}
+                      </td>
+                      {/* <td className="text-center p-2  border-r-2">
+                        {docIdArray[index]}
+                      </td> */}
+                      <td className="text-center p-2  border-r-2">
+                        {item.room}
+                      </td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.type}
+                      </td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.dutyfrom}
+                      </td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.dutyto}
+                      </td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.checkedIn ? "Yes" : "No"}
+                      </td>
+                      <td className="text-center p-2  border-r-2">
+                        {item.isFree ? "Yes" : "No"}
+                      </td>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <td className="text-center p-2" colSpan={7}>
+                  <td className="text-center p-2  border-r-2" colSpan={7}>
                     Loading...
                   </td>
                 </tr>

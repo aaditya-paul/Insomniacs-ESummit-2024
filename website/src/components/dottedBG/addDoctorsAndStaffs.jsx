@@ -1,10 +1,11 @@
 "use client";
-import {db} from "@/lib/firebaseConfig";
-import {addDoc, collection, doc, getDoc, setDoc} from "@firebase/firestore";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
-import React, {useEffect, useState} from "react";
+import { db } from "@/lib/firebaseConfig";
+import { addDoc, collection, doc, getDoc, setDoc } from "@firebase/firestore";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import generateFirestoreId from "../generateUniqueId";
 
-const AddDoctorsAndStaffs = ({employeetype}) => {
+const AddDoctorsAndStaffs = ({ employeetype }) => {
   const params = useParams();
 
   const [name, setName] = useState("");
@@ -13,69 +14,86 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
   const [dutyto, setdutyto] = useState("");
   const [type, setType] = useState("");
   const [checkedIn, setCheckedIn] = useState(null);
+  const [isFree, setIsFree] = useState(null);
+  const [uid, setuid] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchparams = useSearchParams();
 
   const handleAddOrUpdateDoctor = async () => {
-    if (
-      name === "" ||
-      checkedIn === null ||
-      room === "" ||
-      dutyfrom === "" ||
-      dutyto === "" ||
-      type === ""
-    ) {
-      alert("Please fill all the fields");
-      return;
-    }
+    if (!isLoading) {
+      setIsLoading(true);
+      const uid = generateFirestoreId();
+      if (
+        name === "" ||
+        checkedIn === null ||
+        isFree === null ||
+        room === "" ||
+        dutyfrom === "" ||
+        dutyto === "" ||
+        type === ""
+      ) {
+        alert("Please fill all the fields");
+        setIsLoading(false);
+        return;
+      }
 
-    let collection_ref = "doctors";
+      let collection_ref = "doctors";
 
-    if (employeetype == "staff") {
-      collection = "staffs";
-    }
+      if (employeetype == "staff") {
+        collection_ref = "staffs";
+      }
 
-    await fetch("http://192.168.9.96:5000/add/doctor", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      await fetch("http://192.168.9.96:5000/add/doctor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          room: room,
+          duty: {
+            start: dutyfrom,
+            end: dutyto,
+          },
+          speciality: type,
+          checkedIn: checkedIn,
+          uid: uid,
+          isFree: isFree,
+
+          // TODO: Add free:true
+          // free:true
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+
+      await setDoc(doc(db, collection_ref, uid), {
         name: name,
         room: room,
-        duty: {
-          start: dutyfrom,
-          end: dutyto,
-        },
-        speciality: type,
+        dutyfrom: dutyfrom,
+        dutyto: dutyto,
+        type: type,
         checkedIn: checkedIn,
-        // TODO: Add free:true
-        // free:true
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
+        uid: uid,
+        isFree: isFree,
       })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+        .then(() => {
+          alert("Doctor added successfully");
+          setIsLoading(false);
 
-    await addDoc(collection(db, collection_ref), {
-      name: name,
-      room: room,
-      dutyfrom: dutyfrom,
-      dutyto: dutyto,
-      type: type,
-      checkedIn: checkedIn,
-    })
-      .then(() => {
-        alert("Doctor added successfully");
-        window.location.href = "/admin";
-      })
-      .catch((err) => {
-        alert("Error adding doctor");
-      });
+          window.location.href = "/admin";
+        })
+        .catch((err) => {
+          alert("Error adding doctor");
+        });
+    }
   };
 
   useEffect(() => {
@@ -97,6 +115,8 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
               setdutyto(data.dutyto);
               setType(data.type);
               setCheckedIn(data.checkedIn);
+              setIsFree(data.isFree);
+              setuid(data.uid);
             } else {
               alert("Doctor not found");
             }
@@ -191,6 +211,31 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="" className="font-mono text-xl font-bold">
+            Is the {employeetype == "staff" ? `Staff` : `Doctor`} free?:
+          </label>
+          <select
+            name=""
+            id=""
+            className={` bg-transparent border-white   p-4 rounded-md border-b-2 `}
+            onChange={(e) => {
+              setIsFree(e.target.value);
+              console.log(e.target.value);
+            }}
+            placeholder="Enter name"
+          >
+            <option value={null} className="bg-transparent text-black">
+              Select option
+            </option>
+            <option value={true} className="bg-transparent text-black">
+              Yes
+            </option>
+            <option value={false} className="bg-transparent text-black">
+              No
+            </option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="" className="font-mono text-xl font-bold">
             Enter check-in:
           </label>
           <select
@@ -221,7 +266,11 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
               handleAddOrUpdateDoctor();
             }}
           >
-            {searchparams.get("isUpdating") ? "Update" : "Submit"}
+            {!isLoading
+              ? searchparams.get("isUpdating")
+                ? "Update"
+                : "Submit"  
+              : "loading..."}
           </button>
         </div>
       </div>
