@@ -1,0 +1,42 @@
+[
+  {
+    "name": "John Doe",
+    "age": 25,
+    "issue": "Jaundice",
+    "admittedDate": "2021-01-01",
+    "uid": "AUhjxU893x98",
+    "visitCode": "2568",
+    "room": "P1",
+    "dischargeDate": "2021-01-10"
+  },
+  {
+    "name": "Jane Doe",
+    "age": 25,
+    "issue": "Diarrhoea",
+    "admittedDate": "2021-01-01",
+    "uid": "AUhjxU893x99",
+    "visitCode": "2568",
+    "room": "P2",
+    "dischargeDate": "2021-01-15"
+  },
+  {
+    "name": "John Doe",
+    "age": 25,
+    "issue": "Cancer",
+    "admittedDate": "2021-01-01",
+    "uid": "AUhjxU893x98",
+    "visitCode": "2568",
+    "room": "P3",
+    "dischargeDate": "2021-01-20"
+  },
+  {
+    "name": "Jane Doe",
+    "age": 25,
+    "issue": "Tumour",
+    "admittedDate": "2021-01-01",
+    "uid": "AUhjxU893x99",
+    "visitCode": "2568",
+    "room": "P4",
+    "dischargeDate": "2021-01-25"
+  }
+]

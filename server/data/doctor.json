@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Dr. John Doe",
+    "specialty": "General Practitioner",
+    "free": true,
+    "arrived": true,
+    "duty": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "uid": "AUhjxU893x98",
+    "room": "A1"
+  },
+  {
+    "name": "Dr. Jane Doe",
+    "specialty": "Pediatrician",
+    "free": false,
+    "arrived": true,
+    "duty": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "uid": "AUhjxU893x99",
+    "room": "A21"
+  },
+  {
+    "name": "Dr. John Doe",
+    "specialty": "General Practitioner",
+    "free": true,
+    "arrived": true,
+    "duty": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "uid": "AUhjxU893x98",
+    "room": "A10"
+  },
+  {
+    "name": "Dr. Jane Doe",
+    "specialty": "Pediatrician",
+    "free": false,
+    "arrived": true,
+    "duty": {
+      "start": "08:00",
+      "end": "16:00"
+    },
+    "uid": "AUhjxU893x99",
+    "room": "A3"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Paracetamol",
+    "type": "Tablet",
+    "quantity": 20,
+    "uid": "AUhjxU893x98",
+    "room": "M1",
+    "expiry": "2022-01-01",
+    "stockAvailable": 54,
+    "totalStock": 100
+  },
+  {
+    "name": "Ibuprofen",
+    "type": "Tablet",
+    "quantity": 20,
+    "uid": "AUhjxU893x99",
+    "room": "M2",
+    "expiry": "2022-01-01",
+    "stockAvailable": 54,
+    "totalStock": 100
+  }
+]
