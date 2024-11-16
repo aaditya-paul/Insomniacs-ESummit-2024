@@ -81,3 +81,6 @@ def ai_query(query):
 
 def get_conversation_history():
     return memory.get_memory()
+
+def clear_memory():
+    memory.memory.clear()
