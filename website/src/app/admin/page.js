@@ -1,12 +1,12 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import { collection, getDoc, getDocs } from "@firebase/firestore";
+import {db} from "@/lib/firebaseConfig";
+import {collection, getDoc, getDocs} from "@firebase/firestore";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { LuStethoscope } from "react-icons/lu";
-import { RiNurseFill } from "react-icons/ri";
-import { MdOutlineSick } from "react-icons/md";
-import { AiOutlineMedicineBox } from "react-icons/ai";
+import React, {useEffect, useState} from "react";
+import {LuStethoscope} from "react-icons/lu";
+import {RiNurseFill} from "react-icons/ri";
+import {MdOutlineSick} from "react-icons/md";
+import {AiOutlineMedicineBox} from "react-icons/ai";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -103,7 +103,17 @@ const Page = () => {
           </span>
         </div>
         <div className="flex justify-end">
-          <Link href={type === "doctor" ? "/add-doctors" : "/add-staffs"}>
+          <Link
+            href={
+              type === "doctor"
+                ? "/add-doctors"
+                : type === "staffs"
+                ? "/add-staffs"
+                : type === "patient"
+                ? "/add-patients"
+                : "/add-medicines"
+            }
+          >
             <button className="bg-yellow-400 px-5 py-2 transition-all font-bold rounded-lg hover:bg-yellow-500 text-black">
               {type === "doctor"
                 ? "Add Doctors"

@@ -100,14 +100,12 @@ function Page() {
         } transition-all pointer-events-none ease-linear delay-700  absolute left-1/2 -translate-x-1/2 bottom-5 w-[90%] md:w-[60vw] shadow-md bg-blue-700/40 md:backdrop-blur-md rounded-2xl h-[50vh]   `}
       >
         <div className="h-full px-12 py-8 text-white  ">
-          <div className="text-xl font-handwriting leading-10 text-yellow-300    ">
-            <div className=" flex gap-2 items-center ">
-              <div className=" ">
+          <div className="text-xl font-mono  leading-10 text-yellow-300    ">
+            <div className=" flex gap-2  ">
+              <div className=" basis-1/4 ">
                 <Image
                   src={DR}
-                  className=" w-10 h-10 object-contain p-1 rounded-full border"
-                  width={12}
-                  height={12}
+                  className=" mt-5 w-10 h-10 object-contain p-1 rounded-full border"
                   alt="med"
                 />
               </div>

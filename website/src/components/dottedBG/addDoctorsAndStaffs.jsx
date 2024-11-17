@@ -61,9 +61,6 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
           checkedIn: checkedIn,
           uid: uid,
           isFree: isFree,
-
-          // TODO: Add free:true
-          // free:true
         }),
       })
         .then((response) => response.json())
