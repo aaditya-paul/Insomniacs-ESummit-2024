@@ -65,6 +65,10 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
       if (employeetype == "staff") {
         collection_ref = "staffs";
       }
+
+      if (employeetype == "patient") {
+        collection_ref = "patients";
+      }
       const object = {
         name: name,
         room: room,
@@ -102,13 +106,12 @@ const AddDoctorsAndStaffs = ({employeetype}) => {
           uid: uid,
         };
 
-        await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/doctor", {
+        await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/patient", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(),
-          object,
+          body: JSON.stringify(object),
         })
           .then((response) => response.json())
           .then((data) => {

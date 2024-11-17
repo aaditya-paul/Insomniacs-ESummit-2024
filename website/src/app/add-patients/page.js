@@ -1,7 +1,9 @@
+import AddDoctorsAndStaffs from "@/components/dottedBG/addDoctorsAndStaffs";
 import React from "react";
 
 function Page() {
-  return <div>Page</div>;
+  return <AddDoctorsAndStaffs employeetype={}/>;
+
 }
 
 export default Page;
