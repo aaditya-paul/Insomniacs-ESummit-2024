@@ -1,50 +1,122 @@
 [
   {
-    "name": "Dr. John Doe",
-    "specialty": "General Practitioner",
+    "name": "Dr. Aarti Sharma",
+    "specialty": "Cardiologist",
+    "free": false,
+    "arrived": true,
+    "duty": {
+      "start": "09:00",
+      "end": "17:00"
+    },
+    "uid": "DOC2023C001",
+    "room": "Cardiology-1"
+  },
+  {
+    "name": "Dr. Ravi Iyer",
+    "specialty": "Orthopedic Surgeon",
+    "free": true,
+    "arrived": true,
+    "duty": {
+      "start": "10:00",
+      "end": "18:00"
+    },
+    "uid": "DOC2023O002",
+    "room": "Ortho-2"
+  },
+  {
+    "name": "Dr. Meera Menon",
+    "specialty": "Pediatrician",
     "free": true,
     "arrived": true,
     "duty": {
       "start": "08:00",
-      "end": "16:00"
+      "end": "14:00"
     },
-    "uid": "AUhjxU893x98",
-    "room": "A1"
+    "uid": "DOC2023P003",
+    "room": "Pediatrics-5"
   },
   {
-    "name": "Dr. Jane Doe",
-    "specialty": "Pediatrician",
+    "name": "Dr. Harish Gupta",
+    "specialty": "General Physician",
+    "free": true,
+    "arrived": false,
+    "duty": {
+      "start": "12:00",
+      "end": "20:00"
+    },
+    "uid": "DOC2023G004",
+    "room": "General-3"
+  },
+  {
+    "name": "Dr. Anjali Desai",
+    "specialty": "Dermatologist",
     "free": false,
     "arrived": true,
     "duty": {
-      "start": "08:00",
-      "end": "16:00"
+      "start": "11:00",
+      "end": "19:00"
     },
-    "uid": "AUhjxU893x99",
-    "room": "A21"
+    "uid": "DOC2023D005",
+    "room": "Dermatology-2"
   },
   {
-    "name": "Dr. John Doe",
-    "specialty": "General Practitioner",
+    "name": "Dr. Ramesh Singh",
+    "specialty": "Neurologist",
     "free": true,
     "arrived": true,
     "duty": {
-      "start": "08:00",
+      "start": "10:00",
       "end": "16:00"
     },
-    "uid": "AUhjxU893x98",
-    "room": "A10"
+    "uid": "DOC2023N006",
+    "room": "Neurology-4"
   },
   {
-    "name": "Dr. Jane Doe",
-    "specialty": "Pediatrician",
+    "name": "Dr. Neha Kapoor",
+    "specialty": "Gynecologist",
     "free": false,
     "arrived": true,
     "duty": {
+      "start": "07:00",
+      "end": "15:00"
+    },
+    "uid": "DOC2023G007",
+    "room": "Gynaecology-1"
+  },
+  {
+    "name": "Dr. Arjun Patil",
+    "specialty": "Oncologist",
+    "free": false,
+    "arrived": true,
+    "duty": {
+      "start": "13:00",
+      "end": "21:00"
+    },
+    "uid": "DOC2023O008",
+    "room": "Oncology-3"
+  },
+  {
+    "name": "Dr. Sanjay Kumar",
+    "specialty": "ENT Specialist",
+    "free": true,
+    "arrived": false,
+    "duty": {
       "start": "08:00",
+      "end": "14:00"
+    },
+    "uid": "DOC2023E009",
+    "room": "ENT-6"
+  },
+  {
+    "name": "Dr. Priya Joshi",
+    "specialty": "Psychiatrist",
+    "free": true,
+    "arrived": true,
+    "duty": {
+      "start": "10:00",
       "end": "16:00"
     },
-    "uid": "AUhjxU893x99",
-    "room": "A3"
+    "uid": "DOC2023P010",
+    "room": "Psychiatry-2"
   }
 ]
