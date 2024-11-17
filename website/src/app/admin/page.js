@@ -14,6 +14,8 @@ const Page = () => {
   const [staffsArray, setstaffArray] = useState([]);
   const [docIdArray, setDocIdArray] = useState([]);
 
+  const [patientsArray, setpatientsArray] = useState([]);
+
   useEffect(() => {
     async function getDoctors() {
       const querySnapshot = await getDocs(collection(db, "doctors"));
@@ -52,7 +54,7 @@ const Page = () => {
     <>
       <div className="px-24 py-10 flex flex-col gap-7 min-h-screen bg-blue-600">
         <h1 className="font-bold text-4xl text-yellow-400">
-          Insomniacs Hospital
+          Panacea Management
         </h1>
         <div className="flex gap-5 text-white">
           <span
@@ -103,26 +105,83 @@ const Page = () => {
         <div className="flex justify-end">
           <Link href={type === "doctor" ? "/add-doctors" : "/add-staffs"}>
             <button className="bg-yellow-400 px-5 py-2 transition-all font-bold rounded-lg hover:bg-yellow-500 text-black">
-              {type === "doctor" ? "Add Doctors" : "Add Staffs"}
+              {type === "doctor"
+                ? "Add Doctors"
+                : type === "staffs"
+                ? "Add Staffs"
+                : type === "patient"
+                ? "Add Patients"
+                : "Add Medicine"}
             </button>
           </Link>
         </div>
         <table className="rounded-lg border-2 text-white">
-          <thead>
-            <tr className="border-b-2">
-              <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
-              <th className="border-r-2 text-lg text-yellow-400">Name</th>
-              {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
-              <th className="border-r-2 text-lg text-yellow-400">Room</th>
-              <th className="border-r-2 text-lg text-yellow-400">Type</th>
-              <th className="border-r-2 text-lg text-yellow-400">Duty from</th>
-              <th className="border-r-2 text-lg text-yellow-400">Duty to</th>
-              <th className="text-lg border-r-2  text-yellow-400">
-                Checked in / Arrived
-              </th>
-              <th className="text-lg text-yellow-400">Is Doctor free?</th>
-            </tr>
-          </thead>
+          {(type === "doctor" || type === "staffs") && (
+            <thead>
+              <tr className="border-b-2">
+                <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
+                <th className="border-r-2 text-lg text-yellow-400">Name</th>
+                {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
+                <th className="border-r-2 text-lg text-yellow-400">Room</th>
+                <th className="border-r-2 text-lg text-yellow-400">Type</th>
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Duty from
+                </th>
+                <th className="border-r-2 text-lg text-yellow-400">Duty to</th>
+                <th className="text-lg border-r-2  text-yellow-400">
+                  Checked in / Arrived
+                </th>
+                <th className="text-lg text-yellow-400">Is Doctor free?</th>
+              </tr>
+            </thead>
+          )}
+
+          {type === "medicine" && (
+            <thead>
+              <tr className="border-b-2">
+                <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
+                <th className="border-r-2 text-lg text-yellow-400">Name</th>
+                {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
+                <th className="border-r-2 text-lg text-yellow-400">uid</th>
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Stock Available
+                </th>
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Stock total
+                </th>
+                <th className="text-lg border-r-2  text-yellow-400">
+                  expiry date
+                </th>
+                <th className="text-lg text-yellow-400">Bought date</th>
+              </tr>
+            </thead>
+          )}
+          {type === "patient" && (
+            <thead>
+              <tr className="border-b-2">
+                <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
+                <th className="border-r-2 text-lg text-yellow-400">Name</th>
+                <th className="border-r-2 text-lg text-yellow-400">uid</th>
+
+                {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Assigned Room
+                </th>
+                <th className="border-r-2 text-lg text-yellow-400">Diseases</th>
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Admit date
+                </th>
+
+                <th className="text-lg border-r-2  text-yellow-400">
+                  Doctor Assigned
+                </th>
+                <th className="border-r-2 text-lg text-yellow-400">
+                  Is room empty?
+                </th>
+                {/* <th className="text-lg text-yellow-400">Is room free?</th> */}
+              </tr>
+            </thead>
+          )}
 
           {type === "doctor" ? (
             <tbody>
@@ -210,16 +269,31 @@ const Page = () => {
 
           {type === "patient" && (
             <tbody>
-              <tr>
-                <td className="text-center p-2 border-r-2">1</td>
-                <td className="text-center p-2 border-r-2">John Doe</td>
-                <td className="text-center p-2 border-r-2">Room 101</td>
-                <td className="text-center p-2 border-r-2">Patient</td>
-                <td className="text-center p-2 border-r-2">10:00 AM</td>
-                <td className="text-center p-2 border-r-2">12:00 PM</td>
-                <td className="text-center p-2 border-r-2">Yes</td>
-                <td className="text-center p-2">No</td>
-              </tr>
+              {patientsArray.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td className="text-center p-2  border-r-2">{index + 1}</td>
+                    <td className="text-center p-2  border-r-2">{item.name}</td>
+                    {/* <td className="text-center p-2  border-r-2">
+                        {docIdArray[index]}
+                      </td> */}
+                    <td className="text-center p-2  border-r-2">{item.room}</td>
+                    <td className="text-center p-2  border-r-2">{item.type}</td>
+                    <td className="text-center p-2  border-r-2">
+                      {item.dutyfrom}
+                    </td>
+                    <td className="text-center p-2  border-r-2">
+                      {item.dutyto}
+                    </td>
+                    <td className="text-center p-2  border-r-2">
+                      {item.checkedIn ? "Yes" : "No"}
+                    </td>
+                    <td className="text-center p-2  border-r-2">
+                      {item.isFree ? "Yes" : "No"}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           )}
         </table>
