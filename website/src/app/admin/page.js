@@ -1,12 +1,18 @@
 "use client";
-import {db} from "@/lib/firebaseConfig";
-import {collection, doc, getDoc, getDocs, updateDoc} from "@firebase/firestore";
+import { db } from "@/lib/firebaseConfig";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "@firebase/firestore";
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
-import {LuStethoscope} from "react-icons/lu";
-import {RiNurseFill} from "react-icons/ri";
-import {MdOutlineSick} from "react-icons/md";
-import {AiOutlineMedicineBox} from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { LuStethoscope } from "react-icons/lu";
+import { RiNurseFill } from "react-icons/ri";
+import { MdOutlineSick } from "react-icons/md";
+import { AiOutlineMedicineBox } from "react-icons/ai";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -119,17 +125,6 @@ const Page = () => {
           <MdOutlineSick />
           <span className="font-bold text-lg">Patient</span>
         </span>
-        <span
-          className={`${
-            type === "medicine" && "border-b-white"
-          } flex flex-row gap-2 justify-center items-center hover:border-b-white cursor-pointer border-transparent border-2`}
-          onClick={() => {
-            setType("medicine");
-          }}
-        >
-          <AiOutlineMedicineBox />
-          <span className="font-bold text-lg">Medicine</span>
-        </span>
       </div>
       <div className="flex justify-end">
         <Link href={type === "doctor" ? "/add-doctors" : "/add-staffs"}>
@@ -158,17 +153,19 @@ const Page = () => {
               <th className="text-lg border-r-2  text-yellow-400">
                 Checked in / Arrived
               </th>
-              <th className="text-lg text-yellow-400">Is Doctor free?</th>
+              <th className="text-lg text-yellow-400">
+                Is {type == "staffs" ? "staff" : "docter"} free?
+              </th>
             </tr>
           </thead>
         )}
 
-        {type === "medicine" && (
+        {/* {type === "medicine" && (
           <thead>
             <tr className="border-b-2">
               <th className="border-r-2 text-lg text-yellow-400">Sl.</th>
               <th className="border-r-2 text-lg text-yellow-400">Name</th>
-              {/* <th className="border-r-2 text-lg text-yellow-400">uid</th> */}
+              
               <th className="border-r-2 text-lg text-yellow-400">uid</th>
               <th className="border-r-2 text-lg text-yellow-400">
                 Stock Available
@@ -182,7 +179,7 @@ const Page = () => {
               <th className="text-lg text-yellow-400">Bought date</th>
             </tr>
           </thead>
-        )}
+        )} */}
         {type === "patient" && (
           <thead>
             <tr className="border-b-2">
@@ -363,113 +360,107 @@ const Page = () => {
                     <td className="text-center p-2  border-r-2">
                       {item.dutyto}
                     </td>
-                    <td className="text-center p-2  border-r-2">
-                      <input
-                        // value="private"
-                        name="switch2"
-                        id="switch2"
-                        type="checkbox"
-                        className="switch"
-                        onChange={(e) => {
-                          const object = {
-                            name: item.name,
-                            room: item.room,
-                            dutyfrom: item.dutyfrom,
-                            dutyto: item.dutyto,
-                            type: item.type,
-                            checkedIn: item.checkedIn,
-                            uid: item.uid,
-                            isFree: e.target.checked,
-                          };
-                          async function updateState() {
-                            handleClick(object);
-                            await updateDoc(
-                              doc(db, "doctors", docIdArray[index]),
-                              {
-                                isFree: e.target.checked,
-                              }
-                            )
-                              .then(() => {
-                                alert("Successfully updated");
-                              })
-                              .catch((error) => {
-                                alert("Error updating document: ", error);
-                              });
-                          }
-                          updateState();
-                          console.log(e.target.checked);
-                        }}
-                      />
-                      <label htmlFor="switch2">
-                        <span className="switch-x-toggletext">
-                          <span className="switch-x-unchecked ">
-                            <span className="switch-x-hiddenlabel">
-                              Unchecked:{" "}
+                    <td className="text-center p-2 border-r-2 flex flex-col justify-center ">
+                      <div className="checkbox-wrapper-35 text-white flex justify-center items-center">
+                        <input
+                          name="switch"
+                          id="switch"
+                          type="checkbox"
+                          className="switch"
+                          onChange={(e) => {
+                            const object = {
+                              name: item.name,
+                              room: item.room,
+                              dutyfrom: item.dutyfrom,
+                              dutyto: item.dutyto,
+                              type: item.type,
+                              checkedIn: e.target.checked,
+                              uid: item.uid,
+                              isFree: item.isFree,
+                            };
+                            async function updateState() {
+                              handleClick(object);
+                              await updateDoc(
+                                doc(db, "doctors", docIdArray[index]),
+                                {
+                                  checkedIn: e.target.checked,
+                                }
+                              )
+                                .then(() => {
+                                  alert("Successfully updated");
+                                })
+                                .catch((error) => {
+                                  alert("Error updating document: ", error);
+                                });
+                            }
+                            updateState();
+                            console.log(e.target.checked);
+                          }}
+                        />
+                        <label htmlFor="switch">
+                          <span className="switch-x-toggletext">
+                            <span className="switch-x-unchecked ">
+                              <span className="switch-x-hiddenlabel">
+                                Unchecked:{" "}
+                              </span>
+                              Yes
                             </span>
-                            Yes
-                          </span>
-                          <span className="switch-x-checked">
-                            <span className="switch-x-hiddenlabel">
-                              Checked:{" "}
+                            <span className="switch-x-checked">
+                              <span className="switch-x-hiddenlabel">
+                                Checked:{" "}
+                              </span>
+                              No
                             </span>
-                            No
                           </span>
-                        </span>
-                      </label>
+                        </label>
+                      </div>
                     </td>
-                    <td className="text-center p-2  border-r-2">
-                      <input
-                        // value="private"
-                        name="switch2"
-                        id="switch2"
-                        type="checkbox"
-                        className="switch"
-                        onChange={(e) => {
-                          const object = {
-                            name: item.name,
-                            room: item.room,
-                            dutyfrom: item.dutyfrom,
-                            dutyto: item.dutyto,
-                            type: item.type,
-                            checkedIn: item.checkedIn,
-                            uid: item.uid,
-                            isFree: e.target.checked,
-                          };
-                          async function updateState() {
-                            handleClick(object);
-                            await updateDoc(
-                              doc(db, "doctors", docIdArray[index]),
-                              {
-                                isFree: e.target.checked,
-                              }
-                            )
-                              .then(() => {
-                                alert("Successfully updated");
-                              })
-                              .catch((error) => {
-                                alert("Error updating document: ", error);
-                              });
-                          }
-                          updateState();
-                          console.log(e.target.checked);
-                        }}
-                      />
-                      <label htmlFor="switch2">
-                        <span className="switch-x-toggletext">
-                          <span className="switch-x-unchecked ">
-                            <span className="switch-x-hiddenlabel">
-                              Unchecked:{" "}
+                    <td className="text-center p-2">
+                      <div className="checkbox-wrapper-35 text-white flex justify-center items-center">
+                        <input
+                          // value="private"
+                          name="switch2"
+                          id="switch2"
+                          type="checkbox"
+                          className="switch"
+                          onChange={(e) => {
+                            const object = {
+                              name: item.name,
+                              room: item.room,
+                              dutyfrom: item.dutyfrom,
+                              dutyto: item.dutyto,
+                              type: item.type,
+                              checkedIn: item.checkedIn,
+                              uid: item.uid,
+                              isFree: e.target.checked,
+                            };
+                            async function updateState() {
+                              handleClick(object);
+                              await updateDoc(
+                                doc(db, "doctors", docIdArray[index]),
+                                {
+                                  isFree: e.target.checked,
+                                }
+                              )
+                                .then(() => {
+                                  alert("Successfully updated");
+                                })
+                                .catch((error) => {
+                                  alert("Error updating document: ", error);
+                                });
+                            }
+                            updateState();
+                            console.log(e.target.checked);
+                          }}
+                        />
+                        <label htmlFor="switch2">
+                          <span className="switch-x-toggletext">
+                            <span className="switch-x-unchecked ">
+                              {/* {item.isFree ? "Yes" : "No"} */}
                             </span>
-                            Yes
                           </span>
-                          <span className="switch-x-checked">
-                            <span className="switch-x-hiddenlabel">
-                              Checked:{" "}
-                            </span>
-                            No
-                          </span>
-                        </span>
-                      </label>
+                        </label>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -483,34 +474,6 @@ const Page = () => {
         {type === "patient" && (
           <tbody>
             {patientsArray.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td className="text-center p-2  border-r-2">{index + 1}</td>
-                  <td className="text-center p-2  border-r-2">{item.name}</td>
-                  {/* <td className="text-center p-2  border-r-2">
-                        {docIdArray[index]}
-                      </td> */}
-                  <td className="text-center p-2  border-r-2">{item.room}</td>
-                  <td className="text-center p-2  border-r-2">{item.type}</td>
-                  <td className="text-center p-2  border-r-2">
-                    {item.dutyfrom}
-                  </td>
-                  <td className="text-center p-2  border-r-2">{item.dutyto}</td>
-                  <td className="text-center p-2  border-r-2">
-                    {item.checkedIn ? "Yes" : "No"}
-                  </td>
-                  <td className="text-center p-2  border-r-2">
-                    {item.isFree ? "Yes" : "No"}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        )}
-        {type === "medicine" && (
-          <tbody>
-            {/* TODO change*/}
-            {medicineArray.map((item, index) => {
               return (
                 <tr key={index}>
                   <td className="text-center p-2  border-r-2">{index + 1}</td>
