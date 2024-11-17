@@ -1,11 +1,11 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import { addDoc, collection, doc, getDoc, setDoc } from "@firebase/firestore";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import {db} from "@/lib/firebaseConfig";
+import {addDoc, collection, doc, getDoc, setDoc} from "@firebase/firestore";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
+import React, {useEffect, useState} from "react";
 import generateFirestoreId from "../generateUniqueId";
 
-const AddDoctorsAndStaffs = ({ employeetype }) => {
+const AddDoctorsAndStaffs = ({employeetype}) => {
   const params = useParams();
 
   const [name, setName] = useState("");
@@ -102,7 +102,7 @@ const AddDoctorsAndStaffs = ({ employeetype }) => {
           uid: uid,
         };
 
-        await fetch("http://192.168.9.96:5000/add/doctor", {
+        await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/doctor", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

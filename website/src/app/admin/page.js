@@ -1,18 +1,12 @@
 "use client";
-import { db } from "@/lib/firebaseConfig";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-} from "@firebase/firestore";
+import {db} from "@/lib/firebaseConfig";
+import {collection, doc, getDoc, getDocs, updateDoc} from "@firebase/firestore";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { LuStethoscope } from "react-icons/lu";
-import { RiNurseFill } from "react-icons/ri";
-import { MdOutlineSick } from "react-icons/md";
-import { AiOutlineMedicineBox } from "react-icons/ai";
+import React, {useEffect, useState} from "react";
+import {LuStethoscope} from "react-icons/lu";
+import {RiNurseFill} from "react-icons/ri";
+import {MdOutlineSick} from "react-icons/md";
+import {AiOutlineMedicineBox} from "react-icons/ai";
 
 const Page = () => {
   const [type, setType] = useState("staffs");
@@ -58,7 +52,7 @@ const Page = () => {
   }, [staffsArray]);
 
   const handleClick = async (object) => {
-    await fetch("http://192.168.9.96:5000/add/doctor", {
+    await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/doctor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
