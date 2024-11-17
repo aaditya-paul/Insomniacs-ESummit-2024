@@ -17,12 +17,12 @@ function Page() {
       event.returnValue = "";
       console.log("Tab Closed");
 
-      await fetch("http://192.168.9.96:5000/clear-memory", {
+      await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/clear-memory", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({query: "close"}),
+        body: JSON.stringify({ query: "close" }),
       });
     };
 

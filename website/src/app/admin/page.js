@@ -58,7 +58,9 @@ const Page = () => {
   }, [staffsArray]);
 
   const handleClick = async (object) => {
-    await fetch("http://192.168.9.96:5000/add/doctor", {
+
+    if(type == "patient"){
+    await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/patient", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +87,38 @@ const Page = () => {
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
-      });
+      });}
+
+
+
+      await fetch("https://lwtmbxjr-5000.inc1.devtunnels.ms/add/doctor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: object.name,
+          room: object.room,
+          duty: {
+            start: object.dutyfrom,
+            end: object.dutyto,
+          },
+          speciality: object.type,
+          checkedIn: object.checkedIn,
+          uid: object.uid,
+          isFree: object.isFree,
+
+          // TODO: Add free:true
+          // free:true
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
   };
 
   return (
