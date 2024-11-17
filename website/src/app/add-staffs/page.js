@@ -3,9 +3,8 @@ import React from "react";
 
 const Page = () => {
   return (
-    <>
+    
       <AddDoctorsAndStaffs employeetype={"staff"} />
-    </>
   );
 };
 
