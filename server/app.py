@@ -1,41 +1,44 @@
 import json
 from flask import Flask, request, jsonify
-from general_purpose import ai_query,clear_memory
+from general_purpose import ai_query, clear_memory
 from flask_cors import CORS
+
 app = Flask(__name__)
 CORS(app)
 
 # API Endpoint
 @app.route('/add/doctor', methods=['POST'])
-def add_data():
-    """Handle adding data to a JSON file."""
+def add_or_update_doctor():
+    """Handle adding or updating a doctor or staff."""
+    print("Processing request to add or update doctor/staff data")
     data = request.get_json()
-    if not data:
+    if not data or 'uid' not in data:
         return jsonify({"error": "Invalid input"}), 400
 
     try:
-        # Open the file in append mode to directly add the new data
-        with open('data.json', 'r+') as file:
+        with open('./hospital/doctor.json', 'r+') as file:
             try:
                 file_data = json.load(file)  # Load existing data
             except json.JSONDecodeError:
-                file_data = []  # Initialize an empty list if file is empty or corrupted
-            
-            file_data.append(data)  # Add new data
-            file.seek(0)  # Reset file pointer to the start
+                file_data = []  # Initialize an empty list if the file is empty
+
+            # Check if any entry with the same uid exists and remove it
+            file_data = [entry for entry in file_data if entry.get('uid') != data['uid']]
+
+            # Add the new data
+            file_data.append(data)
+            file.seek(0)  # Reset the file pointer to the start
             json.dump(file_data, file, indent=4)  # Write updated data
-            file.truncate()  # Remove remaining old data if any
+            file.truncate()  # Remove any leftover data
         
-        return jsonify({"message": "Data added successfully"}), 200
+        return jsonify({"message": "Data added or updated successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-app.add_url_rule('/add', 'add_data', add_data, methods=['POST'])
 
 @app.route('/clear-memory', methods=['POST'])
 def clear():
     """Handle clear memory requests."""
-    print("clearing memory")
+    print("Clearing memory")
     clear_memory()
     return jsonify({"message": "Memory cleared"}), 200
 
@@ -49,11 +52,11 @@ def query():
     query_text = data['query']
     try:
         res = ai_query(query_text)
-        print(query)
+        print(query_text)
         return jsonify(res)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 # Run the server
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')

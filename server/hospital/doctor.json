@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Aaditya Paul",
+        "room": "001",
+        "duty": {
+            "start": "08:00",
+            "end": "13:00"
+        },
+        "speciality": "Surgeon",
+        "checkedIn": "true",
+        "uid": "kxt3FRzf3z18RgLmFPKo",
+        "isFree": "true"
+    }
+]

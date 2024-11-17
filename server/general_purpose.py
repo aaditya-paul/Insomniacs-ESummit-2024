@@ -59,7 +59,7 @@ def ai_query(query):
     4. List the stock / available amount of a certain medicine.
 
     if someone asks you for diagnosis or treatment just refer them to the most specific doctor if available
-                                      
+    if someone tells you the issue, just refer them to the most specific doctor if available
     If you don't have enough information to answer the query, please respond with "I don't have enough information to answer this query",
     and if the query is not recognized, please respond with "I don't understand the query",
     and if there is an error, please respond with "I encountered an error while processing the query".
