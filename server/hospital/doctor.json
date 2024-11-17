@@ -1,14 +1,170 @@
 [
-    {
-        "name": "Aaditya Paul",
-        "room": "001",
-        "duty": {
-            "start": "08:00",
-            "end": "13:00"
-        },
-        "speciality": "Surgeon",
-        "checkedIn": "true",
-        "uid": "kxt3FRzf3z18RgLmFPKo",
-        "isFree": "true"
-    }
+  {
+    "name": "Ravi Shankar",
+    "age": 30,
+    "uid": "IND893458901",
+    "visitRecords": [
+      {
+        "issue": "Jaundice",
+        "admittedDate": "2023-07-01",
+        "dischargeDate": "2023-07-10",
+        "visitCode": "1001",
+        "room": "General Ward - 12"
+      },
+      {
+        "issue": "Cancer",
+        "admittedDate": "2023-08-01",
+        "dischargeDate": "2023-08-20",
+        "visitCode": "1003",
+        "room": "ICU - 3"
+      }
+    ]
+  },
+  {
+    "name": "Aarti Verma",
+    "age": 27,
+    "uid": "IND893458902",
+    "visitRecords": [
+      {
+        "issue": "Diarrhoea",
+        "admittedDate": "2023-07-02",
+        "dischargeDate": "2023-07-08",
+        "visitCode": "1002",
+        "room": "General Ward - 15"
+      },
+      {
+        "issue": "Tumour",
+        "admittedDate": "2023-08-05",
+        "dischargeDate": "2023-08-25",
+        "visitCode": "1004",
+        "room": "Surgical Ward - 5"
+      }
+    ]
+  },
+  {
+    "name": "Ravi Shankar",
+    "age": 30,
+    "uid": "IND893458901",
+    "visitRecords": [
+      {
+        "issue": "Jaundice",
+        "admittedDate": "2023-07-01",
+        "dischargeDate": "2023-07-10",
+        "visitCode": "1001",
+        "room": "General Ward - 12"
+      },
+      {
+        "issue": "Cancer",
+        "admittedDate": "2023-08-01",
+        "dischargeDate": "2023-08-20",
+        "visitCode": "1003",
+        "room": "ICU - 3"
+      }
+    ]
+  },
+  {
+    "name": "Aarti Verma",
+    "age": 27,
+    "uid": "IND893458902",
+    "visitRecords": [
+      {
+        "issue": "Diarrhoea",
+        "admittedDate": "2023-07-02",
+        "dischargeDate": "2023-07-08",
+        "visitCode": "1002",
+        "room": "General Ward - 15"
+      },
+      {
+        "issue": "Tumour",
+        "admittedDate": "2023-08-05",
+        "dischargeDate": "2023-08-25",
+        "visitCode": "1004",
+        "room": "Surgical Ward - 5"
+      }
+    ]
+  },
+  {
+    "name": "Suresh Kumar",
+    "age": 45,
+    "uid": "IND893458903",
+    "visitRecords": [
+      {
+        "issue": "Hypertension",
+        "admittedDate": "2023-09-01",
+        "dischargeDate": "2023-09-05",
+        "visitCode": "1005",
+        "room": "General Ward - 8"
+      },
+      {
+        "issue": "Heart Disease",
+        "admittedDate": "2023-09-10",
+        "dischargeDate": "2023-09-25",
+        "visitCode": "1006",
+        "room": "ICU - 2"
+      }
+    ]
+  },
+  {
+    "name": "Priya Mehta",
+    "age": 38,
+    "uid": "IND893458904",
+    "visitRecords": [
+      {
+        "issue": "Asthma",
+        "admittedDate": "2023-09-10",
+        "dischargeDate": "2023-09-15",
+        "visitCode": "1007",
+        "room": "General Ward - 10"
+      },
+      {
+        "issue": "Pneumonia",
+        "admittedDate": "2023-09-20",
+        "dischargeDate": "2023-09-30",
+        "visitCode": "1008",
+        "room": "Surgical Ward - 3"
+      }
+    ]
+  },
+  {
+    "name": "Rahul Patil",
+    "age": 50,
+    "uid": "IND893458905",
+    "visitRecords": [
+      {
+        "issue": "Diabetes",
+        "admittedDate": "2023-09-15",
+        "dischargeDate": "2023-09-18",
+        "visitCode": "1009",
+        "room": "General Ward - 6"
+      },
+      {
+        "issue": "Kidney Stones",
+        "admittedDate": "2023-10-05",
+        "dischargeDate": "2023-10-12",
+        "visitCode": "1010",
+        "room": "Surgical Ward - 4"
+      }
+    ]
+  },
+  {
+    "name": "Simran Kapoor",
+    "age": 32,
+    "uid": "IND893458906",
+    "visitRecords": [
+      {
+        "issue": "Migraine",
+        "admittedDate": "2023-08-10",
+        "dischargeDate": "2023-08-15",
+        "visitCode": "1011",
+        "room": "General Ward - 14"
+      },
+      {
+        "issue": "Anxiety",
+        "admittedDate": "2023-08-25",
+        "dischargeDate": "2023-09-05",
+        "visitCode": "1012",
+        "room": "Psychiatric Ward - 2"
+      }
+    ]
+  }
 ]

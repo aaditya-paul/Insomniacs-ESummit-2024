@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "name": "Ravi Shankar",
+    "age": 30,
+    "issue": "Jaundice",
+    "admittedDate": "2023-07-01",
+    "uid": "IND893458901",
+    "visitCode": "1001",
+    "room": "General Ward - 12",
+    "dischargeDate": "2023-07-10"
+  },
+  {
+    "name": "Aarti Verma",
+    "age": 27,
+    "issue": "Diarrhoea",
+    "admittedDate": "2023-07-02",
+    "uid": "IND893458902",
+    "visitCode": "1002",
+    "room": "General Ward - 15",
+    "dischargeDate": "2023-07-08"
+  },
+  {
+    "name": "Ravi Shankar",
+    "age": 30,
+    "issue": "Cancer",
+    "admittedDate": "2023-08-01",
+    "uid": "IND893458901",
+    "visitCode": "1003",
+    "room": "ICU - 3",
+    "dischargeDate": "2023-08-20"
+  },
+  {
+    "name": "Aarti Verma",
+    "age": 27,
+    "issue": "Tumour",
+    "admittedDate": "2023-08-05",
+    "uid": "IND893458902",
+    "visitCode": "1004",
+    "room": "Surgical Ward - 5",
+    "dischargeDate": "2023-08-25"
+  },
+  {
+    "name": "Ramesh Gupta",
+    "age": 45,
+    "issue": "Jaundice",
+    "admittedDate": "2023-09-01",
+    "uid": "IND1234567890",
+    "visitCode": "5001",
+    "room": "Ward A-1",
+    "dischargeDate": "2023-09-10"
+  },
+  {
+    "name": "Pooja Mehra",
+    "age": 34,
+    "issue": "Diarrhoea",
+    "admittedDate": "2023-09-02",
+    "uid": "IND1234567891",
+    "visitCode": "5002",
+    "room": "Ward A-2",
+    "dischargeDate": "2023-09-08"
+  },
+  {
+    "name": "Ramesh Gupta",
+    "age": 45,
+    "issue": "Cancer",
+    "admittedDate": "2023-10-01",
+    "uid": "IND1234567890",
+    "visitCode": "5003",
+    "room": "ICU-5",
+    "dischargeDate": "2023-10-20"
+  },
+  {
+    "name": "Pooja Mehra",
+    "age": 34,
+    "issue": "Brain Tumour",
+    "admittedDate": "2023-10-05",
+    "uid": "IND1234567891",
+    "visitCode": "5004",
+    "room": "Surgical Ward B-3",
+    "dischargeDate": "2023-10-25"
+  },
+  {
+    "name": "Rahul Sharma",
+    "age": 45,
+    "issue": "Jaundice",
+    "admittedDate": "2023-01-01",
+    "uid": "IND4567891234",
+    "visitCode": "1025",
+    "room": "General Ward-101",
+    "dischargeDate": "2023-01-10"
+  },
+  {
+    "name": "Meena Verma",
+    "age": 30,
+    "issue": "Diarrhoea",
+    "admittedDate": "2023-01-02",
+    "uid": "IND4567895678",
+    "visitCode": "1026",
+    "room": "General Ward-102",
+    "dischargeDate": "2023-01-08"
+  },
+  {
+    "name": "Rahul Sharma",
+    "age": 45,
+    "issue": "Liver Cancer",
+    "admittedDate": "2023-02-01",
+    "uid": "IND4567891234",
+    "visitCode": "1027",
+    "room": "Oncology ICU-205",
+    "dischargeDate": "2023-02-20"
+  },
+  {
+    "name": "Meena Verma",
+    "age": 30,
+    "issue": "Brain Tumour",
+    "admittedDate": "2023-02-05",
+    "uid": "IND4567895678",
+    "visitCode": "1028",
+    "room": "Surgical Ward-302",
+    "dischargeDate": "2023-02-25"
+  }
+]
