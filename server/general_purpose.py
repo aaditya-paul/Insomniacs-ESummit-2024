@@ -8,9 +8,10 @@ import time
 # rjdp
 genai.configure(api_key="AIzaSyBKfcmC7PGJ0Ubjn9jASKsHRsLzYWDcRtI")
 
-doctorData = open("./data/doctor.json", "r")
-patientData = open("./data/patient.json", "r")
+doctorData = open("./hospital/doctor.json", "r")
+patientData = open("./hospital/patient.json", "r")
 medData = open("./data/medicine.json", "r")
+staffData = open("./hospital/staff.json", "r")
 
 # model = genai.GenerativeModel("gemini-1.5-flash")
 # model = genai.GenerativeModel("gemini-1.5-pro")
@@ -19,7 +20,7 @@ model = genai.GenerativeModel("gemini-1.0-pro")
 doctor_data = json.load(doctorData)
 patient_data = json.load(patientData)
 med_data = json.load(medData)
-
+staff_data = json.load(staffData)
 doctorData.close()
 patientData.close()
 medData.close()
@@ -51,7 +52,7 @@ def ai_query(query):
     You have access to the following data:
     - A list of doctors with their availability status: {}.
     - A list of patients with their room numbers: {}.
-    - A list of medications prescribed to patients: {}.
+    - A list staff members: {}.
     You can answer the following queries:
     1. Find all free doctors.
     2. List all patients in a specific room.
@@ -69,11 +70,12 @@ def ai_query(query):
     Try to be chill and friendly in your responses.
     
     Also please note that the queries are case-insensitive.
+    dont exceed 4 sentences in your response.
     The previous conversation history is as follows:
     {}
-    respond as if you are continuin the conversation
+    respond as if you are continuing the conversation
     The user asks: "{}"
-    """.format(json.dumps(doctor_data), json.dumps(patient_data), json.dumps(med_data), conversation_history, query))
+    """.format(json.dumps(doctor_data), json.dumps(patient_data),json.dumps(staff_data), conversation_history, query))
     
     memory.add(query, response.text)
     print(response.text)
